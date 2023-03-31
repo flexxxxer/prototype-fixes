@@ -4,8 +4,9 @@ param(
     $GameExe
 )
 
+$PSScriptRoot | Write-Output
 Set-ExecutionPolicy Bypass -Scope Process
-powershell -File D:\prototype-fixes\DisableHid.ps1
+powershell -File "$PSScriptRoot\DisableHid.ps1"
 $pinfo = New-Object System.Diagnostics.ProcessStartInfo
 $pinfo.FileName = $GameExe
 $p = New-Object System.Diagnostics.Process
@@ -19,4 +20,4 @@ elseif ($cpuCoresCount -gt 8) {
     $p.ProcessorAffinity=0x5555
 }
 $p.WaitForExit()
-powershell -File D:\prototype-fixes\EnableHid.ps1
+powershell -File "$PSScriptRoot\EnableHid.ps1"
